@@ -25,7 +25,9 @@ namespace simpleClassLoadSaveToJson
 
         private void buttonAddToList_Click(object sender, EventArgs e)
         {
-            Meet m = new Meet(textBoxTime.Text, textBoxName.Text);
+            DateTime dt = dateTimePickerDate.Value.Date +
+                    dateTimePickerTime.Value.TimeOfDay;
+            Meet m = new Meet(dt, textBoxName.Text);
             lst.Add(m);
             listBoxMeets.Items.Add(m);
         }
@@ -39,6 +41,15 @@ namespace simpleClassLoadSaveToJson
         {
             lst.LoadFromFile();
             lst.ViewToListBox(listBoxMeets);
+        }
+
+        private void listBoxMeets_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = listBoxMeets.SelectedIndex;
+            string[] s = listBoxMeets.Items[index].ToString().Split();
+            DateTime dt = DateTime.Parse(s[0] + " " + s[1]);
+            labelDeltaTime.Text = (dt - DateTime.Today).Days.ToString() + " дней";
+
         }
     }
 }

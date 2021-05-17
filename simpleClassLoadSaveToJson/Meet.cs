@@ -11,10 +11,10 @@ namespace simpleClassLoadSaveToJson
 {
     class Meet
     {
-        public string Time { get; set; }
+        public DateTime Time { get; set; }
         public string Name { get; set; }
 
-        public Meet(string time, string name)
+        public Meet(DateTime time, string name)
         {
             Time = time;
             Name = name;
